@@ -90,6 +90,5 @@ local_settings.py
 
 .env
 db.sqlite3
-
 populate_database.py
 populate_database.json
