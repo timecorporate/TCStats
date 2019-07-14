@@ -1,0 +1,23 @@
+version: '3.4'
+x-default: &default
+  restart: on-failure
+services:
+  api:
+    <<: *default
+    build: .
+
+  db:
+    <<: *default
+    volumes:
+      - type: bind
+        source: ./db-data/db-tcstats-api
+        target: /var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  adminer:
+    <<: *default
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
