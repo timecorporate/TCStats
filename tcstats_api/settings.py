@@ -25,7 +25,7 @@ SECRET_KEY = 'y=3h=o%5j78@)(@vn9*pw)r3_oz0pah)=z60srbtmjupggg1#m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]','0.0.0.0']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', '0.0.0.0']
 
 
 # Application definition
@@ -58,8 +58,7 @@ ROOT_URLCONF = 'tcstats_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,7 +77,19 @@ WSGI_APPLICATION = 'tcstats_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
+if 'TRAVIS' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE':   'django.db.backends.postgresql_psycopg2',
+            'NAME':     'travisci',
+            'USER':     'postgres',
+            'PASSWORD': '',
+            'HOST':     'localhost',
+            'PORT':     '',
+        }
+    }
+else:
+    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tcstats',
@@ -87,7 +98,6 @@ DATABASES = {
         'HOST': 'tcstats_api_db_1',
         'PORT': '5432',
     }
-}
 
 
 # Password validation
