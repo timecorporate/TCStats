@@ -14,10 +14,10 @@ services:
     image: postgres:11-alpine
     volumes:
       - type: volume
-        source: db-bot-contest
+        source: db-tcstats-api
         target: /var/lib/postgresql/data
-    #environment:
-
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
 
 volumes:
   db-tcstats-api:

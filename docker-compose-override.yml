@@ -5,6 +5,8 @@ services:
   api:
     <<: *default
     build: .
+    ports:
+      - 8000:8000
 
   db:
     <<: *default
