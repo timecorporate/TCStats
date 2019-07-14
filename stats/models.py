@@ -27,4 +27,3 @@ class UserStatus(models.Model):
     group = models.ForeignKey(GroupsAndChannels, on_delete=models.CASCADE)
     date_joined = models.DateTimeField()
     user_state = models.CharField(max_length=10)
-

@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'tcstats',
         'USER': 'postgres',
         'PASSWORD': 'mysecretpassword',
-        'HOST': 'tcstats_api_db_1',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -127,3 +127,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    )
+}
