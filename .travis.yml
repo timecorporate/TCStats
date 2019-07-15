@@ -7,6 +7,8 @@
 # * your_github_username
 # * your_repo
 
+dist: xenial
+
 language: python
 
 python:
