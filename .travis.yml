@@ -31,6 +31,7 @@ before_script:
   - psql -c "CREATE DATABASE travisci;" -U postgres
 
 script:
+  - flake8
   - sh build.sh
 
 notifications:
