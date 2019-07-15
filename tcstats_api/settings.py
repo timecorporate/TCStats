@@ -94,7 +94,7 @@ else:
             'NAME': 'tcstats',
             'USER': 'postgres',
             'PASSWORD': 'mysecretpassword',
-            'HOST': 'localhost',
+            'HOST': 'tcstats_api_db_1',
             'PORT': '5432',
         }
     }

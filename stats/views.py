@@ -1,14 +1,19 @@
-# from django.shortcuts import render
-from rest_framework import viewsets
-from rest_framework.response import Response
-from stats.serializers import UserSerializer
-from stats.models import User
-
-# Create your views here.
+from rest_framework import generics
+from stats.serializers import UserSerializer,\
+    GroupsSerializer, ChannelsSerializer
+from stats.models import User, Groups, Channels
 
 
-class UserView(viewsets.ViewSet):
-    def list(self, request):
-        queryset = User.objects.all()
-        serializer = UserSerializer(queryset, many=True)
-        return Response(serializer.data)
+class UserCreateListView(generics.ListCreateAPIView):
+    queryset = User.objects.defer("id")
+    serializer_class = UserSerializer
+
+
+class GroupsCreateListView(generics.ListCreateAPIView):
+    queryset = Groups.objects.defer("id")
+    serializer_class = GroupsSerializer
+
+
+class ChannelsCreateListView(generics.ListCreateAPIView):
+    queryset = Channels.objects.defer("id")
+    serializer_class = ChannelsSerializer
