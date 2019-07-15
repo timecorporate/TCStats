@@ -105,12 +105,12 @@ else:
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME':
-            'django.contrib.auth.password_'
+            'django.contrib.auth.password_' +
             'validation.UserAttributeSimilarityValidator',
     },
     {
         'NAME':
-            'django.contrib.auth.password'
+            'django.contrib.auth.password' +
             '_validation.MinimumLengthValidator',
     },
     {
