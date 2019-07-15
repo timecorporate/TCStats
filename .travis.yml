@@ -29,6 +29,7 @@ install:
 
 before_script:
   - psql -c "CREATE DATABASE travisci;" -U postgres
+  - psql -c "CREATE DATABASE tcstats;" -U postgres
 
 script:
   - flake8
