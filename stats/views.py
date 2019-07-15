@@ -1,4 +1,4 @@
-from django.shortcuts import render
+# from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
 from stats.serializers import UserSerializer
@@ -12,4 +12,3 @@ class UserView(viewsets.ViewSet):
         queryset = User.objects.all()
         serializer = UserSerializer(queryset, many=True)
         return Response(serializer.data)
-

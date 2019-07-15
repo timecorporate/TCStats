@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from stats.models import User, UserStatus, GroupsAndChannels
+from stats.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):

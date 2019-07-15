@@ -1,6 +1,6 @@
 from stats.views import UserView
 
-from django.contrib import admin
+# from django.contrib import admin
 from django.urls import path
 
 urlpatterns = [
