@@ -8,7 +8,6 @@
 # * your_repo
 
 dist: xenial
-
 language: python
 
 python:
