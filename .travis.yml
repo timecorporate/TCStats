@@ -22,13 +22,14 @@ before_install:
   - export DJANGO_SETTINGS_MODULE=tcstats_api.settings
   - export PYTHONPATH=$HOME/builds/dtrandom/TCStats
   - export PIP_USE_MIRRORS=true
+  - export TRAVIS=true
 
 install:
   - pip install -r requirements.txt
 
 before_script:
   - psql -c "CREATE DATABASE travisci;" -U postgres
-  - psql -c "CREATE DATABASE tcstats;" -U postgres
+  #- psql -c "CREATE DATABASE tcstats;" -U postgres
 
 script:
   - flake8
