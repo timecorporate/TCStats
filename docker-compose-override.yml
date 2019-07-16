@@ -4,9 +4,19 @@ x-default: &default
 services:
   api:
     <<: *default
-    build: .
+    build:
+      context: .
+      dockerfile: ./Dockerfile-api
     ports:
       - 8000:8000
+
+  front-end:
+    <<: *default
+    build:
+      context: .
+      dockerfile: ./Dockerfile-front-end
+    ports:
+      - 80:80
 
   db:
     <<: *default
@@ -23,3 +33,5 @@ services:
     restart: always
     ports:
       - 8080:8080
+    links:
+      - db:db
