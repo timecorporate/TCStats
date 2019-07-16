@@ -7,7 +7,13 @@ services:
     <<: *default
     image: matteob99/tcstats-api:latest
     links:
-      - db
+      - db:db
+
+  front-end:
+    <<: *default
+    image: matteob99/tcstats-front-end:latest
+    links:
+      - api
 
   db:
     <<: *default
@@ -17,7 +23,8 @@ services:
         source: db-tcstats-api
         target: /var/lib/postgresql/data
     environment:
-      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_PASSWORD=tcstats
+      - POSTGRES_DB=tcstats
 
 volumes:
   db-tcstats-api:
