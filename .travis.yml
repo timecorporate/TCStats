@@ -7,6 +7,7 @@
 # * your_github_username
 # * your_repo
 
+dist: xenial
 language: python
 
 python:
@@ -21,6 +22,7 @@ before_install:
   - export DJANGO_SETTINGS_MODULE=tcstats_api.settings
   - export PYTHONPATH=$HOME/builds/dtrandom/TCStats
   - export PIP_USE_MIRRORS=true
+  - export TRAVIS=true
 
 install:
   - pip install -r requirements.txt
