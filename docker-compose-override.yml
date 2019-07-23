@@ -7,8 +7,6 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile-api
-    ports:
-      - 8000:8000
 
   front-end:
     <<: *default

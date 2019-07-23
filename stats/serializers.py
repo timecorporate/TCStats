@@ -1,5 +1,11 @@
 from rest_framework import serializers
-from stats.models import User, Groups, Channels
+
+from stats.models import User, Group, Channel
+
+
+class TelegramIDSerializer(serializers.RelatedField):
+    def to_representation(self, value):
+        return value.telegram_id
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -8,13 +14,19 @@ class UserSerializer(serializers.ModelSerializer):
         exclude = ['id']
 
 
-class GroupsSerializer(serializers.ModelSerializer):
+class ChannelsSerializer(serializers.ModelSerializer):
+    users = TelegramIDSerializer(many=True, read_only=True)
+    linked_group = TelegramIDSerializer(read_only=True)
+
     class Meta:
-        model = Groups
+        model = Channel
         exclude = ['id']
 
 
-class ChannelsSerializer(serializers.ModelSerializer):
+class GroupsSerializer(serializers.ModelSerializer):
+    users = TelegramIDSerializer(many=True, read_only=True)
+    linked_channel = TelegramIDSerializer(read_only=True)
+
     class Meta:
-        model = Channels
+        model = Group
         exclude = ['id']

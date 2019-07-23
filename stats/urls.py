@@ -1,11 +1,11 @@
-from stats.views import UserCreateListView,\
-    GroupsCreateListView, ChannelsCreateListView
+from rest_framework.routers import DefaultRouter
+from stats.views import UserViewSet, \
+    GroupViewSet, ChannelsViewSet
 
 # from django.contrib import admin
-from django.urls import path
+router = DefaultRouter()
+router.register("user", UserViewSet)
+router.register("group", GroupViewSet)
+router.register('channel', ChannelsViewSet)
 
-urlpatterns = [
-    path('user/', UserCreateListView.as_view(), name='user-list'),
-    path('group/', GroupsCreateListView.as_view(), name='groups-list'),
-    path('channel/', ChannelsCreateListView.as_view(), name='channels-list'),
-]
+urlpatterns = router.urls
