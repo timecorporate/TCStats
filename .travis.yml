@@ -16,7 +16,7 @@ python:
 services: postgresql
 
 env:
-  - DJANGO=1.4.1
+  - DJANGO=2.2.3
 
 before_install:
   - export DJANGO_SETTINGS_MODULE=tcstats_api.settings
@@ -26,12 +26,16 @@ before_install:
 
 install:
   - pip install -r requirements.txt
+  - pip install botogram2
 
 before_script:
   - psql -c "CREATE DATABASE travisci;" -U postgres
 
 script:
   - sh build.sh
+
+after_script:
+  - python <(curl -Ss https://botogram.dev/travis.py)
 
 notifications:
   email:
