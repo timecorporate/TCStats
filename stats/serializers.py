@@ -1,32 +1,32 @@
 from rest_framework import serializers
-from rest_framework.validators import UniqueTogetherValidator
 
-from stats.models import User, Groups, Channels, UserStatus
+from stats.models import User, Group, Channel
+
+
+class TelegramIDSerializer(serializers.RelatedField):
+    def to_representation(self, value):
+        return value.telegram_id
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
-
-
-class GroupsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Groups
-        fields = '__all__'
+        exclude = ['id']
 
 
 class ChannelsSerializer(serializers.ModelSerializer):
+    users = TelegramIDSerializer(many=True, read_only=True)
+    linked_group = TelegramIDSerializer(read_only=True)
+
     class Meta:
-        model = Channels
-        fields = '__all__'
+        model = Channel
+        exclude = ['id']
 
 
-class UserStatusSerializer(serializers.ModelSerializer):
+class GroupsSerializer(serializers.ModelSerializer):
+    users = TelegramIDSerializer(many=True, read_only=True)
+    linked_channel = TelegramIDSerializer(read_only=True)
+
     class Meta:
-        model = UserStatus
-        fields = '__all__'
-        validators = [UniqueTogetherValidator(
-            queryset=UserStatus.objects.all(),
-            fields=['user', 'channel', 'group'])
-            ]
+        model = Group
+        exclude = ['id']

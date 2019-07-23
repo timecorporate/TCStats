@@ -4,7 +4,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.test import APITestCase
 from rest_framework import status
 from stats.models import User as UserTG
-# Channels, Groups
+# Channel, Group
 # from stats.serializers import *
 
 
@@ -57,8 +57,7 @@ class UserViewSetTestCase(APITestCase):
                                     "last_name": "test-user2"})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data,
-                         {"id": 1,
-                          "telegram_id": self.userTG.telegram_id,
+                         {"telegram_id": self.userTG.telegram_id,
                           "username": self.userTG.username,
                           "first_name": "test-user2",
                           "last_name": "test-user2"})

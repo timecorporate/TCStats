@@ -11,27 +11,23 @@ class User(models.Model):
         return self.first_name
 
 
-class Channels(models.Model):
+class Channel(models.Model):
     telegram_id = models.CharField(max_length=15, unique=True)
     title = models.CharField(max_length=255)
-    users = models.ManyToManyField(User, through='UserStatus')
+    users = models.ManyToManyField(User)
 
     def __str__(self):
         return self.title
 
 
-class Groups(models.Model):
+class Group(models.Model):
     telegram_id = models.CharField(max_length=15, unique=True)
     title = models.CharField(max_length=255)
-    users = models.ManyToManyField(User, through='UserStatus')
-    linked_channel = models.OneToOneField(Channels,
+    users = models.ManyToManyField(User)
+    linked_channel = models.OneToOneField(Channel,
                                           null=True,
-                                          on_delete=models.CASCADE)
+                                          on_delete=models.CASCADE,
+                                          related_name="linked_group")
 
-
-class UserStatus(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    group = models.ForeignKey(Groups, on_delete=models.CASCADE, null=True)
-    channel = models.ForeignKey(Channels, on_delete=models.CASCADE, null=True)
-    date_joined = models.DateTimeField()
-    user_state = models.CharField(max_length=10)
+    def __str__(self):
+        return self.title

@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import User, Groups, Channels, UserStatus
+from .models import User, Group, Channel
 
-admin.register(User)
-admin.register(Groups)
-admin.register(Channels)
-admin.register(UserStatus)
+admin.site.register(User)
+admin.site.register(Group)
+admin.site.register(Channel)
