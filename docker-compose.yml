@@ -6,6 +6,8 @@ services:
   api:
     <<: *default
     image: matteob99/tcstats-api:latest
+    environment:
+      - DOCKER=true
     links:
       - db:db
 

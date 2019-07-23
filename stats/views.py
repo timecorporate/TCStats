@@ -1,19 +1,33 @@
-from rest_framework import generics
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
+
 from stats.serializers import UserSerializer,\
-    GroupsSerializer, ChannelsSerializer
-from stats.models import User, Groups, Channels
+    GroupsSerializer, ChannelsSerializer, UserStatusSerializer
+from stats.models import User, Groups, Channels, UserStatus
 
 
-class UserCreateListView(generics.ListCreateAPIView):
+class UserViewSet(ModelViewSet):
+    lookup_field = 'telegram_id'
     queryset = User.objects.defer("id")
     serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
 
 
-class GroupsCreateListView(generics.ListCreateAPIView):
+class GroupViewSet(ModelViewSet):
+    lookup_field = 'telegram_id'
     queryset = Groups.objects.defer("id")
     serializer_class = GroupsSerializer
+    permission_classes = [IsAuthenticated]
 
 
-class ChannelsCreateListView(generics.ListCreateAPIView):
+class ChannelsViewSet(ModelViewSet):
+    lookup_field = 'telegram_id'
     queryset = Channels.objects.defer("id")
     serializer_class = ChannelsSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class UserStatusViewSet(ModelViewSet):
+    queryset = UserStatus.objects.all()
+    serializer_class = UserStatusSerializer
+    permission_classes = [IsAuthenticated]
